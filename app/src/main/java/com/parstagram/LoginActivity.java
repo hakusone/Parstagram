@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 
@@ -28,19 +27,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if (ParseUser.getCurrentUser() != null) {
+            goMainActivity();
+        }
+
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
-
-        ParseObject firstObject = new  ParseObject("FirstClass");
-        firstObject.put("message","Hey ! First message from android. Parse is now connected");
-        firstObject.saveInBackground(e -> {
-            if (e != null){
-                Log.e("MainActivity", e.getLocalizedMessage());
-            }else{
-                Log.d("MainActivity","Object saved.");
-            }
-        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e != null) {
-                    Log.e(TAG, "issue with login");
+                    Log.e(TAG, "issue with login", e);
                     return;
                 }
                 goMainActivity();
