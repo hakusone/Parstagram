@@ -15,9 +15,9 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] User sees app icon in home screen and styled bottom navigation view
+- [x] User sees app icon in home screen and styled bottom navigation view
 - [ ] Style the feed to look like the real Instagram feed.
-- [ ] After the user submits a new post, show an indeterminate progress bar while the post is being uploaded to Parse.
+- [x] After the user submits a new post, show an indeterminate progress bar while the post is being uploaded to Parse.
 
 The following **additional** features are implemented:
 
@@ -27,7 +27,14 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+Sign up, Logging in, Logging out, Image Capture + Posting, Bottom Navigation
+
+<img src='walkthrough_parstagram.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+User Persistence across app restarts
+
+<img src='walkthrough_persist.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 
 ## Notes
 
@@ -35,8 +42,6 @@ Describe any challenges encountered while building the app.
 
 ## Open-source libraries used
 
-- [Android Async HTTP](https://github.com/codepath/CPAsyncHttpClient) - Simple asynchronous HTTP requests with JSON parsing
-- [Glide](https://github.com/bumptech/glide) - Image loading and caching library for Android
 
 ## License
 

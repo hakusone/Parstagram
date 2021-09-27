@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -180,6 +181,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void savePost(String description, ParseUser currentUser, File photoFile) {
+        ProgressBar pb = (ProgressBar) findViewById(R.id.pbLoading);
+        pb.setVisibility(ProgressBar.VISIBLE);
+
         Post post = new Post();
         post.setDescription(description);
         post.setUser(currentUser);
@@ -195,6 +199,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "Post save was successful");
                 etDescription.setText("");
                 ivPostImage.setImageResource(0);
+
+                // run a background job and once complete
+                pb.setVisibility(ProgressBar.INVISIBLE);
             }
         });
     }

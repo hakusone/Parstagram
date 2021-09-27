@@ -7,21 +7,21 @@
     tools:context=".MainActivity">
 
     <include
-        layout="@layout/toolbar_main"
         android:id="@+id/toolbar"
+        layout="@layout/toolbar_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/etDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/btnSubmit"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="0dp"
         android:layout_marginEnd="5dp"
+        android:layout_marginBottom="0dp"
         android:ems="10"
         android:hint="Description"
         android:inputType="text"
@@ -32,7 +32,7 @@
         android:id="@+id/btnCaptureImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etDescription"
+        android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:text="Take Picture" />
@@ -41,12 +41,30 @@
         android:id="@+id/ivPostImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btnSubmit"
+        android:layout_above="@+id/etDescription"
         android:layout_below="@+id/btnCaptureImage"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="15dp"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivPostImage"
+        android:layout_alignBottom="@+id/ivPostImage"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="170dp"
+        android:layout_marginBottom="150dp"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/btnSubmit"
@@ -54,8 +72,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottom_navigation"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="5dp"
-        android:text="Submit Image" />
+        android:layout_marginBottom="15dp"
+        android:text="Post" />
 
     <include
         android:id="@+id/bottom_navigation"
