@@ -15,4 +15,6 @@
     <string name="user">User</string>
     <string name="sign_up">Sign up</string>
     <string name="username">Username</string>
+    <string name="parstagram">Parstagram</string>
+    <string name="inbox">Inbox</string>
 </resources>
