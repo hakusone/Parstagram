@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/selector_nav_home.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v24/selector_nav_post.xml" value="0.22083333333333333" />
+        <entry key="app/src/main/res/drawable-v24/selector_nav_user.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/layout-w1240dp/activity_login2.xml" value="0.11796875" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.16944444444444445" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_login2.xml" value="0.14375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/bottom_nav.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.2046875" />
         <entry key="app/src/main/res/xml/fileprovider.xml" value="0.2611111111111111" />
       </map>
     </option>

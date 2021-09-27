@@ -1,5 +1,6 @@
 package com.parstagram;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
@@ -12,12 +13,14 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -73,9 +76,42 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        // do something here
+                        return true;
+                    case R.id.action_post:
+                        // do something here
+                        return true;
+                    case R.id.action_user:
+                        // do something here
+                        return true;
+                    case R.id.action_logout:
+                        logoutCurrentUser();
+                        return true;
+                    default: return true;
+                }
+            }
+        });
+
 //        queryPosts();
     }
 
+    private void logoutCurrentUser() {
+        ParseUser.logOut();
+
+        Toast.makeText(MainActivity.this, "You have successfully logged out.", Toast.LENGTH_SHORT).show();
+
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
+    }
+
+    // note: startActivityForResult is deprecated, https://stackoverflow.com/questions/62671106/onactivityresult-method-is-deprecated-what-is-the-alternative
     private void launchCamera() {
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
