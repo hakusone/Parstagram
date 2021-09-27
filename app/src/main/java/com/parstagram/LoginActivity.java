@@ -70,9 +70,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseException e) {
                 if (e != null) {
-                    Log.e(TAG, "issue with signup", e);
+                    Log.e(TAG, "Issue with signup", e);
                     String message = e.getMessage();
-                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Issue with signup", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else {
@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (e != null) {
                     Log.e(TAG, "Issue with login", e);
                     String message = e.getMessage();
-                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Issue with login", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 goMainActivity();
