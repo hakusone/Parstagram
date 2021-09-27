@@ -2,7 +2,7 @@
 
 **Parstagram** is a photo sharing app similar to Instagram but using Parse as its backend.
 
-Time spent: **5** hours spent in total
+Time spent: **7** hours spent in total
 
 ## User Stories
 
@@ -38,7 +38,7 @@ User Persistence across app restarts
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Trying to make the top left camera icon black was the hardest challenge this time. I ended up just importing a material icon since it came in black to begin with.
 
 ## Open-source libraries used
 
