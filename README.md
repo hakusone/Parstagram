@@ -35,6 +35,10 @@ User Persistence across app restarts
 
 <img src='walkthrough_persist.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
+App Icon
+
+<img src='walkthrough_app_icon.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 
 ## Notes
 
