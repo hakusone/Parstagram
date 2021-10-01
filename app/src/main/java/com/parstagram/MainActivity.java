@@ -1,46 +1,34 @@
 package com.parstagram;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 import com.parstagram.fragments.ComposeFragment;
 import com.parstagram.fragments.PostsFragment;
-
-import java.io.File;
-import java.util.List;
+import com.parstagram.fragments.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
+    public static final String SELECTED_ITEM_ID_KEY = "selected_item";
+
+    private static String POSTS_TAG = "posts";
+    private static String COMPOSE_TAG = "compose";
+    private static String PROFILE_TAG = "profile";
+    ComposeFragment composeFragment;
+    PostsFragment postsFragment;
+    ProfileFragment profileFragment;
 
     private BottomNavigationView bottomNavigationView;
 
@@ -48,11 +36,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final FragmentManager fragmentManager = getSupportFragmentManager();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        FragmentManager fm = getSupportFragmentManager();
+
+        postsFragment = (PostsFragment) fm.findFragmentByTag(POSTS_TAG);
+        if (postsFragment == null) {
+            postsFragment = PostsFragment.newInstance();
+        }
+
+        composeFragment = (ComposeFragment) fm.findFragmentByTag(COMPOSE_TAG);
+        if (composeFragment == null) {
+            composeFragment = ComposeFragment.newInstance();
+        }
+
+        profileFragment = (ProfileFragment) fm.findFragmentByTag(PROFILE_TAG);
+        if (profileFragment == null) {
+            profileFragment = ProfileFragment.newInstance();
+        }
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
@@ -60,30 +64,35 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.action_home:
-                    fragment = new PostsFragment();
-                    Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                    fragment = postsFragment;
+//                    Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.action_post:
-                    fragment = new ComposeFragment();
-                    Toast.makeText(MainActivity.this, "Post", Toast.LENGTH_SHORT).show();
+                    fragment = composeFragment;
+//                    Toast.makeText(MainActivity.this, "Post", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.action_logout:
+                    fragment = profileFragment;
+                    logoutCurrentUser();
                     break;
                 case R.id.action_user:
-                    fragment = new ComposeFragment();
-                    Toast.makeText(MainActivity.this, "User", Toast.LENGTH_SHORT).show();
-                    break;
-//                case R.id.action_logout:
-//                    logoutCurrentUser();
-//                    break;
+//                    Toast.makeText(MainActivity.this, "User", Toast.LENGTH_SHORT).show();
                 default:
-                    fragment = new ComposeFragment();
+                    fragment = profileFragment;
                     break;
             }
-            fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
+            fm.beginTransaction().replace(R.id.flContainer, fragment).commit();
 
             return true;
         });
 
-//        queryPosts();
+        if (savedInstanceState != null) {
+            int selected_bottom_item = savedInstanceState.getInt(SELECTED_ITEM_ID_KEY);
+            bottomNavigationView.setSelectedItemId(selected_bottom_item);
+        }
+        else {
+            bottomNavigationView.setSelectedItemId(R.id.action_home);
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -101,20 +110,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    private void queryPosts() {
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        query.include(Post.KEY_USER);
-        query.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> objects, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with querying finding posts", e);
-                    return;
-                }
-                for (Post post: objects) {
-                    Log.i(TAG, "Post: " + post.getDescription() + " Username: " + post.getUser().getUsername());
-                }
-            }
-        });
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        Log.i("MainActivity", "Logging that it's saving to savedInstanceState");
+        outState.putInt(SELECTED_ITEM_ID_KEY, bottomNavigationView.getSelectedItemId());
+        super.onSaveInstanceState(outState);
     }
 }
